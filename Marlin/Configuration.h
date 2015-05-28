@@ -123,11 +123,11 @@ Here are some standard links for getting your machine calibrated:
 //     #define DUMMY_THERMISTOR_998_VALUE 25
 //     #define DUMMY_THERMISTOR_999_VALUE 100
 
-#define TEMP_SENSOR_0 6
+#define TEMP_SENSOR_0 1
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
-#define TEMP_SENSOR_BED 6
+#define TEMP_SENSOR_BED 1
 
 // This makes temp sensor 1 a redundant sensor for sensor 0. If the temperatures difference between these sensors is to high the print will be aborted.
 //#define TEMP_SENSOR_1_AS_REDUNDANT
@@ -187,19 +187,20 @@ Here are some standard links for getting your machine calibrated:
 
 // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 // Ultimaker
-    #define  DEFAULT_Kp 22.2
-    #define  DEFAULT_Ki 1.08
-    #define  DEFAULT_Kd 114
+//    #define  DEFAULT_Kp 22.2
+//    #define  DEFAULT_Ki 1.08
+//    # define  DEFAULT_Kd 114
 
 // MakerGear
 //    #define  DEFAULT_Kp 7.0
 //    #define  DEFAULT_Ki 0.1
 //    #define  DEFAULT_Kd 12
 
-// Mendel Parts V9 on 12V
-//    #define  DEFAULT_Kp 63.0
-//    #define  DEFAULT_Ki 2.25
-//    #define  DEFAULT_Kd 440
+// Folger Tech Prusa i3 with MK7 hotend
+// Used: M303 C10 S230 (Tuned for 230* for 10 cycles)
+    #define  DEFAULT_Kp 17.98
+    #define  DEFAULT_Ki 1.03
+    #define  DEFAULT_Kd 78.63
 #endif // PIDTEMP
 
 //===========================================================================
@@ -214,9 +215,9 @@ Here are some standard links for getting your machine calibrated:
 // If your configuration is significantly different than this and you don't understand the issues involved, you probably
 // shouldn't use bed PID until someone else verifies your hardware works.
 // If this is enabled, find your own PID constants below.
-//#define PIDTEMPBED
+#define PIDTEMPBED
 //
-//#define BED_LIMIT_SWITCHING
+#define BED_LIMIT_SWITCHING
 
 // This sets the max power delivered to the bed, and replaces the HEATER_BED_DUTY_CYCLE_DIVIDER option.
 // all forms of bed control obey this (PID, bang-bang, bang-bang with hysteresis)
@@ -229,15 +230,21 @@ Here are some standard links for getting your machine calibrated:
 #ifdef PIDTEMPBED
 //120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
 //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-    #define  DEFAULT_bedKp 10.00
-    #define  DEFAULT_bedKi .023
-    #define  DEFAULT_bedKd 305.4
+//    #define  DEFAULT_bedKp 10.00
+//    #define  DEFAULT_bedKi .023
+//    #define  DEFAULT_bedKd 305.4
 
 //120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
 //from pidautotune
 //    #define  DEFAULT_bedKp 97.1
 //    #define  DEFAULT_bedKi 1.41
 //    #define  DEFAULT_bedKd 1675.16
+
+//Folger Tech Prusa i3 with MK2B-Dual Heatbed
+//Used: M303 E-1 C8 S90
+    #define  DEFAULT_bedKp 180
+    #define  DEFAULT_bedKi 29.68
+    #define  DEFAULT_bedKd 275.66
 
 // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
